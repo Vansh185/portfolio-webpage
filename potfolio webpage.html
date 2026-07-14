@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editkaro.in | Premium Video Editing & Marketing Agency</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- Root Variables & Reset --- */
+        :root {
+            --bg-color: #0d0f12;
+            --card-bg: #161a22;
+            --primary-color: #ff3e3e;
+            --text-color: #ffffff;
+            --text-muted: #8a94a6;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* --- Header / Navigation --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(13, 15, 18, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(13, 15, 18, 0.6), rgba(13, 15, 18, 1)), 
+                        url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 54px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 span {
+            color: var(--primary-color);
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-inline: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 12px 35px;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(255, 62, 62, 0.4);
+        }
+
+        /* --- Portfolio Grid Section --- */
+        .portfolio-section {
+            padding: 80px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            font-weight: 700;
+        }
+
+        .underline {
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Filters */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Video Cards Styling */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .gallery-item {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+        }
+
+        /* Animation triggers for Filtering classes */
+        .gallery-item.hide {
+            display: none;
+        }
+
+        .gallery-item.show {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .thumbnail-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            overflow: hidden;
+        }
+
+        .thumbnail-wrapper img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        /* Hover overlays */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 15, 18, 0.85);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: var(--transition);
+            cursor: pointer;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .overlay i {
+            font-size: 50px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            transform: scale(0.8);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
+        .gallery-item:hover .overlay i {
+            transform: scale(1);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* --- Lightbox Modal --- */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox-content {
+            width: 90%;
+            max-width: 850px;
+        }
+
+        .video-container {
+            position: relative;
+            padding-top: 56.25%;
+            width: 100%;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(255, 62, 62, 0.2);
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #fff;
+            font-size: 40px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-lightbox:hover {
+            color: var(--primary-color);
+        }
+
+        /* --- CTA & Footer --- */
+        .contact-section {
+            text-align: center;
+            padding: 80px 20px;
+            background: var(--card-bg);
+        }
+
+        .contact-section h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .contact-section p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* --- Responsive Media Queries --- */
+        @media (max-width: 768px) {
+            header { padding: 20px 5%; }
+            nav { display: none; }
+            .hero-content h1 { font-size: 36px; }
+            .portfolio-section { padding: 60px 5%; }
+            .close-lightbox { top: 15px; right: 20px; font-size: 35px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <header>
+        <div class="logo">Editkaro<span>.in</span></div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#portfolio">Work</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>We Post-Produce <span>Masterpieces</span></h1>
+            <p>High-impact video editing and social media marketing that drives millions of views.</p>
+            <a href="#portfolio" class="btn">View Our Work</a>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio-section">
+        <div class="section-title">
+            <h2>Our Portfolio</h2>
+            <div class="underline"></div>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">All Work</button>
+            <button class="filter-btn" data-filter="short-form">Short-Form</button>
+            <button class="filter-btn" data-filter="long-form">Long-Form</button>
+            <button class="filter-btn" data-filter="gaming">Gaming</button>
+            <button class="filter-btn" data-filter="football">Football Edits</button>
+            <button class="filter-btn" data-filter="ecommerce">eCommerce Ads</button>
+            <button class="filter-btn" data-filter="documentary">Documentary</button>
+            <button class="filter-btn" data-filter="color-grading">Color Grading</button>
+            <button class="filter-btn" data-filter="anime">Anime</button>
+        </div>
+
+        <!-- Video Grid Gallery -->
+        <div class="gallery-grid" id="gallery">
+            <!-- Project 1 -->
+            <div class="gallery-item" data-category="short-form">
+                <div class="thumbnail-wrapper">
+                    <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=600&q=80" alt="Short Form Reel">
+                    <div class="overlay" data-video="https://www.w3schools.com/html/mov_bbb.mp4" data-title="Viral TikTok Reel">
+                        <i class="fas fa-play-circle"></i>
+                        <h3>Viral TikTok Reel</h3>
+                        <p>Short-Form</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="gallery-item" data-category="long-form">
+                <div class="thumbnail-wrapper">
+                    <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=600&q=80" alt="YouTube Essay">
+                    <div class="overlay" data-video="https://www.w3schools.com/html/movie.mp4" data-title="YouTube Documentary Style">
+                        <i class="fas fa-play-circle"></i>
+                        <h3>Video Essay Masterclass</h3>
+                        <p>Long-Form</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="gallery-item" data-category="gaming">
+                <div class="thumbnail-wrapper">
+                    <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80" alt="Gaming Edit">
+                    <div class="overlay" data-video="https://www.w3schools.com/html/mov_bbb.mp4" data-title="Valorant Montages">
+                        <i class="fas fa-play-circle"></i>
+                        <h3>Valorant Stream Highlights</h3>
+                        <p>Gaming</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="gallery-item" data-category="football">
+                <div class="thumbnail-wrapper">
+                    <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=600&q=80" alt="Football Edit">
+                    <div class="overlay" data-video="https://www.w3schools.com/html/movie.mp4" data-title="Champions League Promo">
+                        <i class="fas fa-play-circle"></i>
+                        <h3>Clutch Moments Edit</h3>
+                        <p>Football Edits</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="gallery-item" data-category="ecommerce">
+                <div class="thumbnail-wrapper">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" alt="eCommerce Ad">
+                    <div class="overlay" data-video="https://www.w3schools.com/html/mov_bbb.mp4" data-title="Minimalist Watch Commercial">
+                        <i class="fas fa-play-circle"></i>
+                        <h3>Brand Product Promo</h3>
+                        <p>eCommerce Ads</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 6 -->
+            <div class="gallery-item" data-category="documentary">
+                <div class="thumbnail-wrapper">
+                    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=600&q=80" alt="Documentary Style">
+                    <div class="overlay" data-video="https://www.w3schools.com/html/movie.mp4" data-title="Chasing Light Mini-Doc">
+                        <i class="fas fa-play-circle"></i>
+                        <h3>Cinematic Travel Doc</h3>
+                        <p>Documentary Style</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 7 -->
+            <div class="gallery-item" data-category="color-grading">
+                <div class="thumbnail-wrapper">
+                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80" alt="Color Grading Showcase">
+                    <div class="overlay" data-video="https://www.w3schools.com/html/mov_bbb.mp4" data-title="Log Film Transformation">
+                        <i class="fas fa-play-circle"></i>
+                        <h3>Hollywood Teal & Orange Breakdown</h3>
+                        <p>Color Grading</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 8 -->
+            <div class="gallery-item" data-category="anime">
+                <div class="thumbnail-wrapper">
+                    <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80" alt="Anime Edit">
+                    <div class="overlay" data-video="https://www.w3schools.com/html/movie.mp4" data-title="Neo Tokyo AMV">
+                        <i class="fas fa-play-circle"></i>
+                        <h3>Cyberpunk AMV</h3>
+                        <p>Anime Videos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Lightbox / Modal Structure -->
+    <div class="lightbox" id="videoLightbox">
+        <span class="close-lightbox">&times;</span>
+        <div class="lightbox-content">
+            <h3 id="lightboxTitle" style="color: #fff; margin-bottom: 15px;">Video Title</h3>
+            <div class="video-container">
+                <video id="lightboxVideo" controls src=""></video>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact CTA -->
+    <section id="contact" class="contact-section">
+        <h2>Ready to skyrocket your content?</h2>
+        <p>Let's collaborate and create something viral.</p>
+        <a href="mailto:work@editkaro.in" class="btn">Get In Touch</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Editkaro.in. All rights reserved. Created for VaultofCodes Showcase.</p>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // --- 1. Portfolio Grid Filter Logic ---
+            const filterButtons = document.querySelectorAll(".filter-btn");
+            const galleryItems = document.querySelectorAll(".gallery-item");
+
+            filterButtons.forEach(button => {
+                button.addEventListener("click", () => {
+                    filterButtons.forEach(btn => btn.classList.remove("active"));
+                    button.classList.add("active");
+
+                    const targetFilter = button.getAttribute("data-filter");
+
+                    galleryItems.forEach(item => {
+                        const itemCategory = item.getAttribute("data-category");
+
+                        if (targetFilter === "all" || itemCategory === targetFilter) {
+                            item.classList.remove("hide");
+                            item.classList.add("show");
+                        } else {
+                            item.classList.remove("show");
+                            item.classList.add("hide");
+                        }
+                    });
+                });
+            });
+
+            // --- 2. Video Lightbox Logic ---
+            const overlays = document.querySelectorAll(".overlay");
+            const lightbox = document.getElementById("videoLightbox");
+            const lightboxVideo = document.getElementById("lightboxVideo");
+            const lightboxTitle = document.getElementById("lightboxTitle");
+            const closeLightbox = document.querySelector(".close-lightbox");
+
+            overlays.forEach(overlay => {
+                overlay.addEventListener("click", () => {
+                    const videoUrl = overlay.getAttribute("data-video");
+                    const videoTitle = overlay.getAttribute("data-title");
+
+                    lightboxTitle.textContent = videoTitle;
+                    lightboxVideo.src = videoUrl;
+
+                    lightbox.classList.add("active");
+                    lightboxVideo.play();
+                });
+            });
+
+            const shutLightbox = () => {
+                lightbox.classList.remove("active");
+                lightboxVideo.pause();
+                lightboxVideo.src = ""; 
+            };
+
+            closeLightbox.addEventListener("click", shutLightbox);
+            
+            lightbox.addEventListener("click", (e) => {
+                if (e.target === lightbox) {
+                    shutLightbox();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
